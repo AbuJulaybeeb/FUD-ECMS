@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal - ECMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { milk: '#fffcf9', rust: '#a73a22', mahogany: '#4a1e15', mahoganyHover: '#36150f' } } } }
+    </script>
+</head>
+<body data-theme="light" class="bg-milk text-stone-800 font-sans antialiased overflow-hidden flex h-screen">
+
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/40 z-40 hidden transition-opacity lg:hidden"></div>
+
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-white transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:flex flex-col shadow-xl">
+        <div class="flex items-center justify-center h-20 border-b border-white/10 bg-slate-950">
+            <h1 class="text-2xl font-bold tracking-wider text-white">ECMS<span class="text-blue-500">.</span>Admin</h1>
+        </div>
+
+        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+            <a href="admin.html" class="flex items-center px-4 py-3 bg-blue-600/20 text-blue-400 rounded-lg font-medium transition-colors border border-blue-500/20">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                System Overview
+            </a>
+            <a href="#" class="flex items-center px-4 py-3 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                User Management
+            </a>
+            <a href="#" class="flex items-center px-4 py-3 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                System Reports
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-white/10">
+            <button id="logout-btn" class="flex items-center w-full px-4 py-3 bg-red-600/20 hover:bg-red-600/40 text-red-100 rounded-lg transition-colors">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Sign Out
+            </button>
+        </div>
+    </aside>
+
+    <div class="flex-1 flex flex-col h-full relative">
+        <header class="h-20 flex items-center justify-between px-6 bg-white border-b border-stone-200 lg:justify-end">
+            <button id="hamburger-btn" class="lg:hidden text-slate-800 focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+            <div class="flex items-center gap-3">
+                <div class="text-right hidden sm:block">
+                    <p class="text-sm font-bold text-slate-900">System Administrator</p>
+                    <p class="text-xs text-green-600 font-medium tracking-wide">● ALL SYSTEMS OPERATIONAL</p>
+                </div>
+                <div class="avatar placeholder"><div class="bg-slate-900 text-white rounded-full w-10 shadow-sm"><span class="font-bold">A</span></div></div>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-6 md:p-8 bg-slate-50">
+            <div class="mb-8">
+                <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">System Overview</h2>
+                <p class="text-slate-500 mt-1">Real-time metrics for the Educational Counseling Management System.</p>
+            </div>
+
+            <div class="stats shadow w-full mb-8 border border-stone-200">
+                <div class="stat">
+                    <div class="stat-figure text-blue-600">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <div class="stat-title text-slate-500 font-medium">Registered Students</div>
+                    <div class="stat-value text-slate-900">1,204</div>
+                    <div class="stat-desc text-green-600 font-medium">↗︎ 42 this month</div>
+                </div>
+                
+                <div class="stat">
+                    <div class="stat-figure text-rust">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <div class="stat-title text-slate-500 font-medium">Total Appointments</div>
+                    <div class="stat-value text-slate-900">856</div>
+                    <div class="stat-desc">All time completed</div>
+                </div>
+                
+                <div class="stat">
+                    <div class="stat-figure text-green-500">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
+                    </div>
+                    <div class="stat-title text-slate-500 font-medium">Avg Satisfaction</div>
+                    <div class="stat-value text-slate-900">4.8/5</div>
+                    <div class="stat-desc">Based on 642 reviews</div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
+                <div class="px-6 py-5 border-b border-stone-200 bg-white flex justify-between items-center">
+                    <h3 class="font-bold text-slate-900">Recent System Activity</h3>
+                    <button class="btn btn-sm btn-outline text-slate-600">Export Report</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra">
+                        <thead class="bg-slate-50 text-slate-600">
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>User</th>
+                                <th>Action/Event</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Oct 25, 2024 - 14:32</td>
+                                <td class="font-medium">dr.jenkins@university.edu</td>
+                                <td>Completed counseling session</td>
+                                <td><span class="badge badge-success text-white badge-sm">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>Oct 25, 2024 - 14:15</td>
+                                <td class="font-medium">student_442@gmail.com</td>
+                                <td>Submitted session feedback</td>
+                                <td><span class="badge badge-success text-white badge-sm">Success</span></td>
+                            </tr>
+                            <tr>
+                                <td>Oct 25, 2024 - 13:05</td>
+                                <td class="font-medium">student_891@gmail.com</td>
+                                <td>New account registration</td>
+                                <td><span class="badge badge-info text-white badge-sm">New User</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        function toggleSidebar() { sidebar.classList.toggle('-translate-x-full'); overlay.classList.toggle('hidden'); }
+        hamburgerBtn.addEventListener('click', toggleSidebar); overlay.addEventListener('click', toggleSidebar);
+    </script>
+    <script type="module" src="../assets/app.js"></script>
+</body>
+</html>

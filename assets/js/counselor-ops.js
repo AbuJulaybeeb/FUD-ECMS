@@ -79,14 +79,13 @@ function generatePendingHTML(data, docId) {
 }
 
 // Function to generate the HTML row for Confirmed requests
-function generateConfirmedHTML(data) {
-    // Basic date parsing for the UI block
+function generateConfirmedHTML(data, docId) {
     const dateObj = new Date(data.date);
     const month = dateObj.toLocaleString('default', { month: 'short' });
     const day = dateObj.getDate() || '--';
 
     return `
-    <div class="p-4 flex items-center justify-between hover:bg-stone-50 transition-colors">
+    <div class="p-4 flex items-center justify-between hover:bg-stone-50 transition-colors border-b border-stone-100">
         <div class="flex items-center gap-4">
             <div class="bg-green-100 text-green-700 w-12 h-12 rounded-lg flex flex-col items-center justify-center">
                 <span class="text-xs font-bold uppercase">${month}</span>
@@ -97,7 +96,9 @@ function generateConfirmedHTML(data) {
                 <p class="text-sm text-stone-500">${data.time} • ${data.reason.substring(0, 30)}...</p>
             </div>
         </div>
-        <button class="px-4 py-2 text-sm font-medium text-rust border border-rust/30 rounded-lg hover:bg-rust hover:text-white transition-colors">View Details</button>
+        <div class="flex gap-2">
+            <button onclick="updateStatus('${docId}', 'Completed')" class="px-4 py-2 text-sm font-medium bg-rust text-white rounded-lg hover:bg-mahogany transition-colors shadow-sm">Mark Completed</button>
+        </div>
     </div>`;
 }
 
