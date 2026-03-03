@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECMS - Educational Counseling Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans min-h-screen flex flex-col selection:bg-blue-100 selection:text-blue-900">
+
+    <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
+        <div class="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
+            <div class="flex items-center gap-2">
+                <div class="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">E</div>
+                <span class="font-bold text-xl tracking-tight text-slate-900">ECMS</span>
+            </div>
+            
+            <nav class="flex items-center gap-4">
+                <a href="login.html" class="hidden md:inline-flex items-center justify-center text-sm font-medium transition-colors hover:text-slate-900 text-slate-600 h-10 px-4 py-2">
+                    Log in
+                </a>
+                <a href="signup.html" class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 bg-slate-900 text-slate-50 hover:bg-slate-900/90 h-10 px-4 py-2 shadow-sm">
+                    Get Started
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-1 flex flex-col items-center justify-center text-center px-4 py-24 md:py-32">
+        <div class="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-800 mb-8">
+            🚀 Now available for all University Students
+        </div>
+        
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 max-w-4xl leading-tight">
+            Student Support & Counseling, <br class="hidden md:block"/>
+            <span class="text-blue-600">Simplified.</span>
+        </h1>
+        
+        <p class="text-lg md:text-xl text-slate-600 max-w-2xl mb-10 leading-relaxed">
+            Access professional counseling, manage your appointments, and find mental health and career resources—all in one secure, confidential platform.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <a href="signup.html" class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 bg-blue-600 text-white hover:bg-blue-700 h-12 px-8 shadow-md w-full sm:w-auto text-base">
+                Book a Session
+            </a>
+            <a href="#learn-more" class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 border border-slate-200 bg-white hover:bg-slate-100 hover:text-slate-900 h-12 px-8 w-full sm:w-auto text-base">
+                Learn More
+            </a>
+        </div>
+    </main>
+
+</body>
+</html>

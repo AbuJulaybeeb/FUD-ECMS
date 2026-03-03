@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECMS - Create Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="h-screen w-full flex items-center justify-center bg-slate-950/70 font-sans">
+
+    <div class="relative w-full max-w-md p-8 mx-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl shadow-2xl">
+        
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-semibold tracking-tight text-white mb-1">Create an Account</h1>
+            <p class="text-slate-300 text-sm">Join the Faculty Counseling Portal</p>
+        </div>
+
+        <form id="signup-form" class="space-y-4">
+            <div>
+                <label for="fullName" class="block text-sm font-medium text-slate-200 mb-1">Full Name</label>
+                <input type="text" id="fullName" required 
+                    class="flex h-10 w-full rounded-md border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 transition-colors"
+                    placeholder="John Doe">
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-slate-200 mb-1">Email Address</label>
+                <input type="email" id="email" required 
+                    class="flex h-10 w-full rounded-md border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 transition-colors"
+                    placeholder="student@gmail.com">
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-slate-200 mb-1">Password</label>
+                <input type="password" id="password" required 
+                    class="flex h-10 w-full rounded-md border border-white/20 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 transition-colors"
+                    placeholder="••••••••">
+            </div>
+
+            <div>
+                <label for="role" class="block text-sm font-medium text-slate-200 mb-1">I am a...</label>
+                <select id="role" class="flex h-10 w-full rounded-md border border-white/20 bg-white/10 px-3 py-2 text-sm text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 [&>option]:text-slate-900">
+                    <option value="student">Student</option>
+                    <option value="counselor">Counselor</option>
+                </select>
+            </div>
+
+            <button type="submit" 
+                class="inline-flex mt-2 w-full items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 disabled:pointer-events-none disabled:opacity-50 bg-slate-100 text-slate-900 hover:bg-slate-200 h-10 px-4 py-2">
+                Sign Up
+            </button>
+        </form>
+
+        <p class="mt-6 text-center text-sm text-slate-300">
+            Already have an account? 
+            <a href="login.html" class="font-medium text-white hover:underline transition-colors">Sign in</a>
+        </p>
+    </div>
+
+    <script type="module" src="assets/js/auth.js"></script>
+</body>
+</html>
