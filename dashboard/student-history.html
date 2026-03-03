@@ -72,24 +72,49 @@
                         <th>Status</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td class="font-medium">Oct 28, 2024<br><span class="text-xs text-stone-400">10:00 AM</span></td>
-                        <td>Dr. Sarah Jenkins</td>
-                        <td>Career Guidance</td>
-                        <td><div class="badge badge-warning gap-2">Pending</div></td>
-                    </tr>
-                    <tr>
-                        <td class="font-medium">Sep 15, 2024<br><span class="text-xs text-stone-400">2:00 PM</span></td>
-                        <td>Dr. Michael Chen</td>
-                        <td>Stress Management</td>
-                        <td><div class="badge badge-success gap-2 text-white">Completed</div></td>
-                    </tr>
-                    </tbody>
+                    <tbody id="history-table-body" class="text-stone-700"></tbody>
                 </table>
             </div>
         </main>
     </div>
+
+    <dialog id="feedback_modal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box bg-white">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h3 class="font-bold text-2xl text-mahogany mb-1">Session Feedback</h3>
+            <p class="text-sm text-stone-500 mb-6">Your feedback helps us improve our counseling services.</p>
+            
+            <form id="feedback-form" class="space-y-4">
+                <input type="hidden" id="feedback-appointment-id">
+
+                <div class="form-control w-full">
+                    <label class="label"><span class="label-text font-bold text-stone-700">How would you rate your session?</span></label>
+                    <div class="rating rating-lg mt-2">
+                        <input type="radio" name="session-rating" value="1" class="mask mask-star-2 bg-rust" />
+                        <input type="radio" name="session-rating" value="2" class="mask mask-star-2 bg-rust" />
+                        <input type="radio" name="session-rating" value="3" class="mask mask-star-2 bg-rust" checked />
+                        <input type="radio" name="session-rating" value="4" class="mask mask-star-2 bg-rust" />
+                        <input type="radio" name="session-rating" value="5" class="mask mask-star-2 bg-rust" />
+                    </div>
+                </div>
+
+                <div class="form-control w-full">
+                    <label class="label"><span class="label-text font-bold text-stone-700">Comments (Optional)</span></label>
+                    <textarea id="feedback-comments" class="textarea textarea-bordered h-24 bg-stone-50 focus:border-rust focus:ring-rust" placeholder="Share your thoughts..."></textarea>
+                </div>
+
+                <div class="modal-action mt-6">
+                    <button type="button" onclick="feedback_modal.close()" class="btn btn-ghost">Cancel</button>
+                    <button type="submit" class="btn bg-rust hover:bg-mahogany text-white border-none px-8">Submit Feedback</button>
+                </div>
+            </form>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
 
     <script>
         const hamburgerBtn = document.getElementById('hamburger-btn');
@@ -99,5 +124,6 @@
         hamburgerBtn.addEventListener('click', toggleSidebar); overlay.addEventListener('click', toggleSidebar);
     </script>
     <script type="module" src="../assets/app.js"></script>
+    <script type="module" src="../assets/js/student-history.js"></script>
 </body>
 </html>
