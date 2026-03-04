@@ -32,19 +32,18 @@ onAuthStateChanged(auth, (user) => {
 });
 
 function listenToStudentAppointments(studentId) {
-    // Query: Get appointments for THIS student only, sorted by newest first
+    // Query appointments, sort by creation date
     const q = query(
         collection(db, "appointments"), 
-        where("studentId", "==", studentId)
+        where("studentId", "==", studentId),
+        orderBy("createdAt", "desc")
     );
 
     onSnapshot(q, (snapshot) => {
-        
-        // 1. Check for Real-Time Changes to trigger Notifications
+        // Notifications Logic
         snapshot.docChanges().forEach((change) => {
             if (change.type === "modified") {
                 const data = change.doc.data();
-                
                 if (data.status === "Confirmed") {
                     showNotification(`✅ Good news! Your session on ${data.date} has been confirmed.`, "alert-success");
                 } else if (data.status === "Declined") {
@@ -53,40 +52,59 @@ function listenToStudentAppointments(studentId) {
             }
         });
 
-        // 2. Update the "Next Appointment" UI Card
-        let latestAppointment = null;
+        const historyList = document.getElementById('dashboard-history-list');
+        historyList.innerHTML = ''; // Clear loading text
         
-        // Find the most recent upcoming appointment (Confirmed or Pending)
+        let latestAppointment = null;
+        let appointmentCount = 0;
+
         snapshot.forEach((doc) => {
             const data = doc.data();
-            // In a real app we'd compare dates, here we grab the first valid one for the prototype
-            if (data.status === "Confirmed" || data.status === "Pending") {
+            appointmentCount++;
+
+            // Determine Next Appointment Card (First Pending/Confirmed found)
+            if (!latestAppointment && (data.status === "Confirmed" || data.status === "Pending")) {
                 latestAppointment = data;
             }
+
+            // Build History Table Rows
+            let badgeClass = "badge-ghost";
+            if (data.status === "Pending") badgeClass = "badge-warning";
+            if (data.status === "Confirmed") badgeClass = "badge-info text-white";
+            if (data.status === "Completed") badgeClass = "badge-success text-white";
+            if (data.status === "Declined") badgeClass = "badge-error text-white";
+
+            const counselorName = data.counselorId === 'dr_jenkins' ? 'Dr. Sarah Jenkins' : 'Dr. Michael Chen';
+
+            historyList.innerHTML += `
+                <tr>
+                    <td class="font-medium">${data.date}<br><span class="text-xs text-stone-400">${data.time}</span></td>
+                    <td>${counselorName}</td>
+                    <td class="truncate max-w-xs">${data.reason}</td>
+                    <td><div class="badge ${badgeClass} font-bold shadow-sm">${data.status}</div></td>
+                </tr>
+            `;
         });
 
+        if (appointmentCount === 0) {
+            historyList.innerHTML = `<tr><td colspan="4" class="text-center italic text-stone-500 py-4">No sessions booked yet.</td></tr>`;
+        }
+
+        // Update Next Appointment UI Card
         if (latestAppointment) {
-            // Hide the "Empty" state, show the "Active" state
             noApptState.classList.add('hidden');
             activeApptState.classList.remove('hidden');
-
-            // Populate the data
             document.getElementById('next-appt-status').textContent = latestAppointment.status;
-            document.getElementById('next-appt-counselor').textContent = 
-                latestAppointment.counselorId === 'dr_jenkins' ? 'Dr. Sarah Jenkins' : 'Dr. Michael Chen';
+            document.getElementById('next-appt-counselor').textContent = latestAppointment.counselorId === 'dr_jenkins' ? 'Dr. Sarah Jenkins' : 'Dr. Michael Chen';
             document.getElementById('next-appt-reason').textContent = latestAppointment.reason;
             document.getElementById('next-appt-date').textContent = latestAppointment.date;
             document.getElementById('next-appt-time').textContent = latestAppointment.time;
 
-            // Change badge color based on status
             const statusBadge = document.getElementById('next-appt-status');
-            if (latestAppointment.status === "Pending") {
-                statusBadge.className = "badge bg-orange-100 text-orange-700 border-none font-bold mb-2";
-            } else {
-                statusBadge.className = "badge bg-green-100 text-green-700 border-none font-bold mb-2";
-            }
+            statusBadge.className = latestAppointment.status === "Pending" 
+                ? "badge bg-orange-100 text-orange-700 border-none font-bold mb-2" 
+                : "badge bg-green-100 text-green-700 border-none font-bold mb-2";
         } else {
-            // No active appointments
             noApptState.classList.remove('hidden');
             activeApptState.classList.add('hidden');
         }
