@@ -90,17 +90,26 @@ if (loginForm) {
             submitBtn.textContent = "Signing In...";
             submitBtn.disabled = true;
 
-            // 1. Authenticate User
+            // Authenticate User
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            // 2. Fetch User Role from Firestore
+            // Fetch User Role from Firestore
             const userDoc = await getDoc(doc(db, "users", user.uid));
             
             if (userDoc.exists()) {
                 const userData = userDoc.data();
+
+                // NEW: Check if the account is suspended
+                if (userData.accountStatus === "Suspended") {
+                    await signOut(auth); // Force sign them out immediately
+                    alert("Your account has been suspended by the Administrator. Please contact support.");
+                    submitBtn.textContent = "Sign In";
+                    submitBtn.disabled = false;
+                    return; // Stop the login process
+                }
                 
-                // 3. Route to the correct dashboard
+                // Route to the correct dashboard
                 window.location.href = `dashboard/${userData.role}.html`;
             } else {
                 alert("No user record found in database!");
