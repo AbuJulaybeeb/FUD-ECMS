@@ -70,10 +70,14 @@ function loadHistory(studentId) {
 
             tableBody.innerHTML += `
                 <tr class="hover:bg-stone-50 transition-colors">
-                    <td class="font-medium">${data.date}<br><span class="text-xs text-stone-400">${data.time}</span></td>
-                    <td class="font-semibold text-slate-800">${data.counselorId === 'dr_jenkins' ? 'Dr. Sarah Jenkins' : 'Dr. Michael Chen'}</td>
-                    <td class="truncate max-w-xs text-sm text-slate-600">${data.reason}</td>
-                    <td>
+                    <td class="font-medium whitespace-nowrap">${data.date}<br><span class="text-xs text-stone-400">${data.time}</span></td>
+                    <td class="font-semibold text-slate-800 whitespace-nowrap">${data.counselorId === 'dr_jenkins' ? 'Dr. Sarah Jenkins' : 'Dr. Michael Chen'}</td>
+                    
+                    <td class="truncate max-w-[150px] lg:max-w-xs text-sm text-slate-600 hidden md:table-cell" title="${data.reason}">
+                        ${data.reason}
+                    </td>
+                    
+                    <td class="whitespace-nowrap">
                         <div class="flex flex-col gap-2 items-start">
                             <div class="badge ${badgeClass} gap-2 font-bold">${data.status}</div>
                             ${actionHtml}
