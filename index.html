@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth transition-colors duration-300">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +11,7 @@
     
     <script>
         tailwind.config = { 
+            darkMode: 'class', // Enables professional toggle-based dark mode
             theme: { 
                 extend: { 
                     colors: { 
@@ -34,81 +35,98 @@
         }
     </script>
 </head>
-<body data-theme="light" class="bg-milk text-stone-800 font-sans selection:bg-rust selection:text-white flex flex-col min-h-screen relative overflow-x-hidden">
+<body data-theme="light" class="bg-milk dark:bg-slate-950 text-stone-800 dark:text-stone-200 font-sans selection:bg-rust selection:text-white flex flex-col min-h-screen relative overflow-x-hidden transition-colors duration-300">
 
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-orange-300 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 animate-blob -z-10"></div>
-    <div class="absolute top-0 right-1/4 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 animate-blob animation-delay-2000 -z-10"></div>
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-orange-300 dark:bg-orange-600 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 dark:opacity-20 animate-blob -z-10 transition-colors duration-500"></div>
+    <div class="absolute top-0 right-1/4 w-96 h-96 bg-blue-200 dark:bg-blue-900 rounded-full mix-blend-multiply filter blur-[128px] opacity-40 dark:opacity-20 animate-blob animation-delay-2000 -z-10 transition-colors duration-500"></div>
 
-    <header class="navbar bg-white/70 backdrop-blur-xl sticky top-0 z-50 border-b border-white/50 shadow-[0_4px_30px_rgba(0,0,0,0.05)] px-4 md:px-8 lg:px-12">
+    <header class="navbar bg-white/70 dark:bg-slate-950/70 backdrop-blur-xl sticky top-0 z-40 border-b border-white/50 dark:border-slate-800/50 shadow-[0_4px_30px_rgba(0,0,0,0.05)] px-4 md:px-8 lg:px-12 transition-colors duration-300">
         
         <div class="navbar-start w-full lg:w-1/3 flex justify-between lg:justify-start items-center">
-            <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
-                <img src="assets/images/fud-logo.png" alt="Federal University Dutse Crest" class="h-12 w-auto object-contain" onerror="this.outerHTML='<span class=\\'font-black text-2xl text-mahogany\\'>FUD<span class=\\'text-rust\\'>.</span>ECMS</span>'">
-                <div class="hidden xl:flex flex-col">
-                    <span class="font-bold text-mahogany leading-none text-lg">Federal University Dutse</span>
-                    <span class="text-xs text-stone-500 font-medium tracking-wide uppercase mt-0.5">Counseling Portal</span>
+            <a href="index.html" class="flex items-center gap-2 sm:gap-3 hover:opacity-80 transition-opacity">
+                <img src="assets/images/fud-logo.png" alt="FUD Crest" class="h-10 sm:h-12 w-auto object-contain" onerror="this.outerHTML='<span class=\\'font-black text-xl text-mahogany dark:text-white\\'>FUD</span>'">
+                <div class="flex flex-col">
+                    <span class="font-bold text-mahogany dark:text-white leading-none text-sm sm:text-lg">FUD ECMS</span>
+                    <span class="text-[10px] sm:text-xs text-stone-500 dark:text-stone-400 font-medium tracking-wide uppercase mt-0.5">Counseling Portal</span>
                 </div>
             </a>
             
-            <div class="dropdown dropdown-end lg:hidden">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle text-mahogany">
-                    <i data-lucide="menu"></i>
-                </div>
-                <ul tabindex="0" class="menu menu-sm dropdown-content mt-4 z-[1] p-3 shadow-2xl bg-white/95 backdrop-blur-lg rounded-2xl w-56 border border-white/50">
-                    <li><a href="#features" class="text-stone-700 py-3 font-medium"><i data-lucide="layers" class="w-4 h-4 mr-2"></i> Features</a></li>
-                    <li><a href="#about" class="text-stone-700 py-3 font-medium"><i data-lucide="info" class="w-4 h-4 mr-2"></i> About Portal</a></li>
-                    <div class="divider my-1"></div>
-                    <li><a href="login.html" class="text-mahogany font-bold py-3"><i data-lucide="log-in" class="w-4 h-4 mr-2"></i> Log In</a></li>
-                </ul>
+            <div class="flex items-center gap-1 lg:hidden">
+                <button class="theme-toggle btn btn-ghost btn-circle btn-sm text-stone-600 dark:text-stone-300">
+                    <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                </button>
+                <button id="mobile-menu-open" class="btn btn-ghost btn-circle btn-sm text-mahogany dark:text-white">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
             </div>
         </div>
 
         <div class="navbar-center hidden lg:flex w-1/3 justify-center">
-            <ul class="menu menu-horizontal px-1 text-stone-600 font-semibold gap-2 bg-white/50 rounded-full border border-stone-200/50 px-3 py-1 shadow-sm">
-                <li><a href="#features" class="hover:text-rust hover:bg-orange-50/50 rounded-full transition-all">Features</a></li>
-                <li><a href="#about" class="hover:text-rust hover:bg-orange-50/50 rounded-full transition-all">About Portal</a></li>
+            <ul class="menu menu-horizontal px-1 text-stone-600 dark:text-stone-300 font-semibold gap-2 bg-white/50 dark:bg-slate-900/50 rounded-full border border-stone-200/50 dark:border-slate-700/50 px-3 py-1 shadow-sm transition-colors duration-300">
+                <li><a href="#features" class="hover:text-rust dark:hover:text-orange-400 hover:bg-orange-50/50 dark:hover:bg-slate-800 rounded-full transition-all">Features</a></li>
+                <li><a href="#about" class="hover:text-rust dark:hover:text-orange-400 hover:bg-orange-50/50 dark:hover:bg-slate-800 rounded-full transition-all">About Portal</a></li>
             </ul>
         </div>
 
-        <div class="navbar-end hidden lg:flex w-1/3 justify-end gap-3">
-            <a href="login.html" class="btn btn-ghost text-stone-600 hover:text-mahogany hover:bg-stone-100 rounded-xl px-6">Log In</a>
+        <div class="navbar-end hidden lg:flex w-1/3 justify-end gap-3 items-center">
+            <button class="theme-toggle btn btn-ghost btn-circle text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-slate-800 mr-2 transition-colors duration-300">
+                <i data-lucide="moon" class="dark:hidden"></i>
+                <i data-lucide="sun" class="hidden dark:block"></i>
+            </button>
+            <a href="login.html" class="btn btn-ghost text-stone-600 dark:text-stone-300 hover:text-mahogany dark:hover:text-white hover:bg-stone-100 dark:hover:bg-slate-800 rounded-xl px-6 transition-colors duration-300">Log In</a>
             <a href="signup.html" class="btn bg-rust hover:bg-mahogany text-white border-none shadow-lg shadow-rust/30 rounded-xl px-7 transition-all hover:-translate-y-0.5">Get Started</a>
         </div>
     </header>
+
+    <div id="mobile-menu" class="fixed inset-0 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl z-50 flex flex-col transition-all duration-300 opacity-0 pointer-events-none translate-x-full">
+        <div class="flex justify-end p-4 md:p-8">
+            <button id="mobile-menu-close" class="btn btn-ghost btn-circle text-mahogany dark:text-white">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+        </div>
+        <div class="flex flex-col items-center justify-center flex-1 gap-8 text-2xl font-bold px-6 text-center">
+            <a href="#features" class="mobile-link text-mahogany dark:text-white hover:text-rust transition-colors">Platform Features</a>
+            <a href="#about" class="mobile-link text-mahogany dark:text-white hover:text-rust transition-colors">About ECMS</a>
+            <div class="w-16 h-px bg-stone-200 dark:bg-slate-800 my-4"></div>
+            <a href="login.html" class="mobile-link text-stone-500 dark:text-stone-400 hover:text-mahogany dark:hover:text-white transition-colors">Log In to Portal</a>
+            <a href="signup.html" class="mobile-link btn bg-rust hover:bg-mahogany text-white border-none shadow-lg px-12 h-16 text-xl rounded-2xl w-full max-w-xs mt-4">Get Started</a>
+        </div>
+    </div>
 
     <main class="flex-grow">
         <section class="hero min-h-[75vh] relative py-12 lg:py-0">
             <div class="hero-content flex-col lg:flex-row-reverse gap-8 lg:gap-16 px-4 sm:px-8 lg:px-12 max-w-7xl w-full">
                 
                 <div class="lg:w-1/2 relative w-full flex justify-center mt-8 lg:mt-0 group">
-                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" class="rounded-3xl shadow-2xl border border-white/50 w-full max-w-md lg:max-w-full object-cover aspect-[4/3] lg:aspect-auto transform lg:rotate-2 group-hover:rotate-0 transition-transform duration-700 ease-out" alt="FUD Students" />
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" class="rounded-3xl shadow-2xl border border-white/50 dark:border-slate-800/50 w-full max-w-md lg:max-w-full object-cover aspect-[4/3] lg:aspect-auto transform lg:rotate-2 group-hover:rotate-0 transition-all duration-700 ease-out" alt="FUD Students" />
                     
-                    <div class="absolute -bottom-6 lg:-left-6 right-4 lg:right-auto bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center gap-4 animate-bounce" style="animation-duration: 4s;">
-                        <div class="bg-green-100 p-3 rounded-full text-green-600 shadow-inner">
+                    <div class="absolute -bottom-6 lg:-left-6 right-4 lg:right-auto bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 dark:border-slate-700/50 flex items-center gap-4 animate-bounce transition-colors duration-300" style="animation-duration: 4s;">
+                        <div class="bg-green-100 dark:bg-green-900/30 p-3 rounded-full text-green-600 dark:text-green-400 shadow-inner">
                             <i data-lucide="check-circle-2"></i>
                         </div>
                         <div>
-                            <p class="text-xs text-stone-500 font-bold uppercase tracking-widest">Portal Status</p>
-                            <p class="text-lg font-black text-mahogany leading-none mt-1">Online & Active</p>
+                            <p class="text-xs text-stone-500 dark:text-stone-400 font-bold uppercase tracking-widest">Portal Status</p>
+                            <p class="text-lg font-black text-mahogany dark:text-white leading-none mt-1">Online & Active</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="lg:w-1/2 text-center lg:text-left pt-6 lg:pt-0">
-                    <div class="inline-flex items-center gap-2 badge bg-orange-100/80 text-rust border border-orange-200/50 font-bold py-4 px-5 mb-6 shadow-sm rounded-full backdrop-blur-sm">
+                    <div class="inline-flex items-center gap-2 badge bg-orange-100/80 dark:bg-orange-900/20 text-rust dark:text-orange-400 border border-orange-200/50 dark:border-orange-500/20 font-bold py-4 px-5 mb-6 shadow-sm rounded-full backdrop-blur-sm transition-colors duration-300">
                         <i data-lucide="graduation-cap" class="w-4 h-4"></i> Faculty of Education
                     </div>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-mahogany leading-tight mb-6 tracking-tight">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-mahogany dark:text-white leading-tight mb-6 tracking-tight transition-colors duration-300">
                         Student wellness, <br class="hidden sm:block"/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-rust to-orange-500">simplified.</span>
                     </h1>
-                    <p class="py-2 text-base sm:text-lg text-stone-600 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                    <p class="py-2 text-base sm:text-lg text-stone-600 dark:text-stone-400 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed transition-colors duration-300">
                         Access professional counseling, schedule appointments effortlessly, and find the academic and mental health resources you need to thrive at Federal University Dutse.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="signup.html" class="btn bg-mahogany hover:bg-rust text-white border-none shadow-xl shadow-mahogany/20 px-8 h-14 rounded-xl text-base sm:text-lg w-full sm:w-auto group transition-all">
+                        <a href="signup.html" class="btn bg-mahogany dark:bg-rust hover:bg-rust dark:hover:bg-orange-600 text-white border-none shadow-xl shadow-mahogany/20 px-8 h-14 rounded-xl text-base sm:text-lg w-full sm:w-auto group transition-all">
                             Book a Session <i data-lucide="arrow-right" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"></i>
                         </a>
-                        <a href="#features" class="btn bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 hover:border-stone-300 px-8 h-14 rounded-xl shadow-sm text-base sm:text-lg w-full sm:w-auto">
+                        <a href="#features" class="btn bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-700 text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-slate-800 px-8 h-14 rounded-xl shadow-sm text-base sm:text-lg w-full sm:w-auto transition-colors duration-300">
                             Explore Features
                         </a>
                     </div>
@@ -116,28 +134,28 @@
             </div>
         </section>
 
-        <section class="bg-white/50 backdrop-blur-md py-8 lg:py-12 border-y border-white/50 w-full relative z-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+        <section class="bg-white/50 dark:bg-slate-950/50 backdrop-blur-md py-8 lg:py-12 border-y border-white/50 dark:border-slate-800/50 w-full relative z-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-colors duration-300">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="stats stats-vertical lg:stats-horizontal shadow-sm border border-stone-100 w-full bg-white/80 backdrop-blur-xl overflow-hidden rounded-3xl">
-                    <div class="stat place-items-center lg:place-items-start py-6 lg:py-8 px-8 hover:bg-stone-50/50 transition-colors group">
-                        <div class="stat-figure text-rust/30 group-hover:text-rust transition-colors hidden sm:block"><i data-lucide="users" class="w-10 h-10"></i></div>
-                        <div class="stat-title text-stone-500 font-bold tracking-wide uppercase text-xs">Registered Students</div>
-                        <div class="stat-value text-mahogany text-4xl mt-2 tracking-tight">1.2K+</div>
-                        <div class="stat-desc text-stone-400 font-medium mt-2">Active this semester</div>
+                <div class="stats stats-vertical lg:stats-horizontal shadow-sm border border-stone-100 dark:border-slate-800 w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl overflow-hidden rounded-3xl transition-colors duration-300">
+                    <div class="stat place-items-center lg:place-items-start py-6 lg:py-8 px-8 hover:bg-stone-50/50 dark:hover:bg-slate-800/50 transition-colors group">
+                        <div class="stat-figure text-rust/30 dark:text-orange-500/30 group-hover:text-rust dark:group-hover:text-orange-400 transition-colors hidden sm:block"><i data-lucide="users" class="w-10 h-10"></i></div>
+                        <div class="stat-title text-stone-500 dark:text-stone-400 font-bold tracking-wide uppercase text-xs">Registered Students</div>
+                        <div class="stat-value text-mahogany dark:text-white text-4xl mt-2 tracking-tight">1.2K+</div>
+                        <div class="stat-desc text-stone-400 dark:text-stone-500 font-medium mt-2">Active this semester</div>
                     </div>
                     
-                    <div class="stat place-items-center lg:place-items-start py-6 lg:py-8 px-8 hover:bg-stone-50/50 transition-colors border-t lg:border-t-0 lg:border-l border-stone-100 group">
-                        <div class="stat-figure text-rust/30 group-hover:text-rust transition-colors hidden sm:block"><i data-lucide="stethoscope" class="w-10 h-10"></i></div>
-                        <div class="stat-title text-stone-500 font-bold tracking-wide uppercase text-xs">Professional Staff</div>
-                        <div class="stat-value text-rust text-4xl mt-2 tracking-tight">15+</div>
-                        <div class="stat-desc text-stone-400 font-medium mt-2">Certified Counselors</div>
+                    <div class="stat place-items-center lg:place-items-start py-6 lg:py-8 px-8 hover:bg-stone-50/50 dark:hover:bg-slate-800/50 transition-colors border-t lg:border-t-0 lg:border-l border-stone-100 dark:border-slate-800 group">
+                        <div class="stat-figure text-rust/30 dark:text-orange-500/30 group-hover:text-rust dark:group-hover:text-orange-400 transition-colors hidden sm:block"><i data-lucide="stethoscope" class="w-10 h-10"></i></div>
+                        <div class="stat-title text-stone-500 dark:text-stone-400 font-bold tracking-wide uppercase text-xs">Professional Staff</div>
+                        <div class="stat-value text-rust dark:text-orange-400 text-4xl mt-2 tracking-tight">15+</div>
+                        <div class="stat-desc text-stone-400 dark:text-stone-500 font-medium mt-2">Certified Counselors</div>
                     </div>
                     
-                    <div class="stat place-items-center lg:place-items-start py-6 lg:py-8 px-8 hover:bg-stone-50/50 transition-colors border-t lg:border-t-0 lg:border-l border-stone-100 group">
-                        <div class="stat-figure text-rust/30 group-hover:text-rust transition-colors hidden sm:block"><i data-lucide="clock" class="w-10 h-10"></i></div>
-                        <div class="stat-title text-stone-500 font-bold tracking-wide uppercase text-xs">Average Wait Time</div>
-                        <div class="stat-value text-mahogany text-4xl mt-2 tracking-tight">< 24h</div>
-                        <div class="stat-desc text-green-600 font-medium mt-2 flex items-center gap-1"><i data-lucide="trending-down" class="w-3 h-3"></i> Highly efficient</div>
+                    <div class="stat place-items-center lg:place-items-start py-6 lg:py-8 px-8 hover:bg-stone-50/50 dark:hover:bg-slate-800/50 transition-colors border-t lg:border-t-0 lg:border-l border-stone-100 dark:border-slate-800 group">
+                        <div class="stat-figure text-rust/30 dark:text-orange-500/30 group-hover:text-rust dark:group-hover:text-orange-400 transition-colors hidden sm:block"><i data-lucide="clock" class="w-10 h-10"></i></div>
+                        <div class="stat-title text-stone-500 dark:text-stone-400 font-bold tracking-wide uppercase text-xs">Average Wait Time</div>
+                        <div class="stat-value text-mahogany dark:text-white text-4xl mt-2 tracking-tight">< 24h</div>
+                        <div class="stat-desc text-green-600 dark:text-green-400 font-medium mt-2 flex items-center gap-1"><i data-lucide="trending-down" class="w-3 h-3"></i> Highly efficient</div>
                     </div>
                 </div>
             </div>
@@ -145,37 +163,37 @@
 
         <section id="features" class="py-20 lg:py-32 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <div class="inline-block px-4 py-1.5 rounded-full bg-orange-100 text-rust font-bold text-sm tracking-widest uppercase mb-4">Platform Capabilities</div>
-                <h2 class="text-3xl leading-tight font-extrabold text-mahogany sm:text-4xl lg:text-5xl max-w-2xl mx-auto tracking-tight">Everything you need for academic success</h2>
+                <div class="inline-block px-4 py-1.5 rounded-full bg-orange-100 dark:bg-orange-900/30 text-rust dark:text-orange-400 font-bold text-sm tracking-widest uppercase mb-4 transition-colors duration-300">Platform Capabilities</div>
+                <h2 class="text-3xl leading-tight font-extrabold text-mahogany dark:text-white sm:text-4xl lg:text-5xl max-w-2xl mx-auto tracking-tight transition-colors duration-300">Everything you need for academic success</h2>
                 
                 <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 text-left">
-                    <div class="card bg-white/80 backdrop-blur-xl shadow-lg shadow-stone-200/50 border border-white hover:shadow-2xl hover:border-rust/20 transition-all duration-500 rounded-3xl group">
+                    <div class="card bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-lg shadow-stone-200/50 dark:shadow-none border border-white dark:border-slate-800 hover:shadow-2xl hover:border-rust/20 dark:hover:border-orange-500/30 transition-all duration-500 rounded-3xl group">
                         <div class="card-body p-8">
-                            <div class="w-16 h-16 bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl flex items-center justify-center text-rust mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-slate-800 dark:to-slate-800 rounded-2xl flex items-center justify-center text-rust dark:text-orange-400 mb-6 shadow-sm border border-orange-100 dark:border-slate-700 group-hover:scale-110 transition-transform duration-500">
                                 <i data-lucide="calendar-check-2" class="w-8 h-8"></i>
                             </div>
-                            <h3 class="card-title text-2xl text-mahogany mb-3">Real-Time Scheduling</h3>
-                            <p class="text-stone-500 leading-relaxed text-base">Book, reschedule, or cancel appointments instantly. Our live calendar ensures you never face double-bookings or delays.</p>
+                            <h3 class="card-title text-2xl text-mahogany dark:text-white mb-3 transition-colors duration-300">Real-Time Scheduling</h3>
+                            <p class="text-stone-500 dark:text-stone-400 leading-relaxed text-base transition-colors duration-300">Book, reschedule, or cancel appointments instantly. Our live calendar ensures you never face double-bookings or delays.</p>
                         </div>
                     </div>
                     
-                    <div class="card bg-white/80 backdrop-blur-xl shadow-lg shadow-stone-200/50 border border-white hover:shadow-2xl hover:border-rust/20 transition-all duration-500 rounded-3xl group">
+                    <div class="card bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-lg shadow-stone-200/50 dark:shadow-none border border-white dark:border-slate-800 hover:shadow-2xl hover:border-rust/20 dark:hover:border-orange-500/30 transition-all duration-500 rounded-3xl group">
                         <div class="card-body p-8">
-                            <div class="w-16 h-16 bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl flex items-center justify-center text-rust mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-slate-800 dark:to-slate-800 rounded-2xl flex items-center justify-center text-rust dark:text-orange-400 mb-6 shadow-sm border border-orange-100 dark:border-slate-700 group-hover:scale-110 transition-transform duration-500">
                                 <i data-lucide="shield-check" class="w-8 h-8"></i>
                             </div>
-                            <h3 class="card-title text-2xl text-mahogany mb-3">Secure & Confidential</h3>
-                            <p class="text-stone-500 leading-relaxed text-base">Your privacy is our priority. Session notes and history are encrypted and strictly restricted to your assigned counselor.</p>
+                            <h3 class="card-title text-2xl text-mahogany dark:text-white mb-3 transition-colors duration-300">Secure & Confidential</h3>
+                            <p class="text-stone-500 dark:text-stone-400 leading-relaxed text-base transition-colors duration-300">Your privacy is our priority. Session notes and history are encrypted and strictly restricted to your assigned counselor.</p>
                         </div>
                     </div>
                     
-                    <div class="card bg-white/80 backdrop-blur-xl shadow-lg shadow-stone-200/50 border border-white hover:shadow-2xl hover:border-rust/20 transition-all duration-500 rounded-3xl sm:col-span-2 lg:col-span-1 group">
+                    <div class="card bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-lg shadow-stone-200/50 dark:shadow-none border border-white dark:border-slate-800 hover:shadow-2xl hover:border-rust/20 dark:hover:border-orange-500/30 transition-all duration-500 rounded-3xl sm:col-span-2 lg:col-span-1 group">
                         <div class="card-body p-8">
-                            <div class="w-16 h-16 bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl flex items-center justify-center text-rust mb-6 shadow-sm group-hover:scale-110 transition-transform duration-500">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-slate-800 dark:to-slate-800 rounded-2xl flex items-center justify-center text-rust dark:text-orange-400 mb-6 shadow-sm border border-orange-100 dark:border-slate-700 group-hover:scale-110 transition-transform duration-500">
                                 <i data-lucide="book-open" class="w-8 h-8"></i>
                             </div>
-                            <h3 class="card-title text-2xl text-mahogany mb-3">Resource Library</h3>
-                            <p class="text-stone-500 leading-relaxed text-base">Gain 24/7 access to curated guides on managing exam anxiety, resume building, and mental well-being strategies.</p>
+                            <h3 class="card-title text-2xl text-mahogany dark:text-white mb-3 transition-colors duration-300">Resource Library</h3>
+                            <p class="text-stone-500 dark:text-stone-400 leading-relaxed text-base transition-colors duration-300">Gain 24/7 access to curated guides on managing exam anxiety, resume building, and mental well-being strategies.</p>
                         </div>
                     </div>
                 </div>
@@ -183,12 +201,12 @@
         </section>
     </main>
 
-    <footer class="bg-mahogany text-stone-300 pt-16 pb-8 border-t-[6px] border-rust">
+    <footer class="bg-mahogany dark:bg-slate-900 text-stone-300 pt-16 pb-8 border-t-[6px] border-rust dark:border-orange-600 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
             <aside class="col-span-2 lg:col-span-2">
                 <div class="flex items-center gap-3 mb-6">
                     <img src="assets/images/fud-logo.png" alt="FUD Crest" class="w-12 h-12 object-contain grayscale brightness-200" onerror="this.style.display='none'">
-                    <div class="text-3xl font-black text-white tracking-widest">ECMS<span class="text-rust">.</span></div>
+                    <div class="text-3xl font-black text-white tracking-widest">ECMS<span class="text-rust dark:text-orange-500">.</span></div>
                 </div>
                 <p class="text-base leading-relaxed max-w-sm text-stone-400">
                     Official Educational Counseling Management System for the Faculty of Education, Federal University Dutse.
@@ -196,20 +214,18 @@
             </aside> 
             <nav class="flex flex-col gap-3">
                 <h6 class="text-white font-bold tracking-wider uppercase text-sm mb-2">Services</h6> 
-                <a href="#" class="hover:text-rust transition-colors">Academic Counseling</a>
-                <a href="#" class="hover:text-rust transition-colors">Mental Health Support</a>
-                <a href="#" class="hover:text-rust transition-colors">Career Guidance</a>
+                <a href="#" class="hover:text-rust dark:hover:text-orange-400 transition-colors">Academic Counseling</a>
+                <a href="#" class="hover:text-rust dark:hover:text-orange-400 transition-colors">Mental Health Support</a>
             </nav> 
             <nav class="flex flex-col gap-3">
                 <h6 class="text-white font-bold tracking-wider uppercase text-sm mb-2">Portals</h6> 
-                <a href="login.html" class="hover:text-rust transition-colors">Student Login</a>
-                <a href="login.html" class="hover:text-rust transition-colors">Counselor Access</a>
-                <a href="signup.html" class="hover:text-rust transition-colors">Register Account</a>
+                <a href="login.html" class="hover:text-rust dark:hover:text-orange-400 transition-colors">Student Login</a>
+                <a href="login.html" class="hover:text-rust dark:hover:text-orange-400 transition-colors">Counselor Access</a>
             </nav> 
             <nav class="flex flex-col gap-3">
                 <h6 class="text-white font-bold tracking-wider uppercase text-sm mb-2">Legal</h6> 
-                <a href="#" class="hover:text-rust transition-colors">Terms of Use</a>
-                <a href="#" class="hover:text-rust transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-rust dark:hover:text-orange-400 transition-colors">Terms of Use</a>
+                <a href="#" class="hover:text-rust dark:hover:text-orange-400 transition-colors">Privacy Policy</a>
             </nav>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-white/10 text-center text-sm text-stone-500">
@@ -219,6 +235,57 @@
 
     <script>
         lucide.createIcons();
+    </script>
+
+    <script>
+        // 1. Light/Dark Mode Logic
+        const html = document.documentElement;
+        const themeToggles = document.querySelectorAll('.theme-toggle');
+        
+        // Check local storage or system preference on load
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        // Toggle Event Listeners
+        themeToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                html.classList.toggle('dark');
+                if (html.classList.contains('dark')) {
+                    localStorage.theme = 'dark';
+                } else {
+                    localStorage.theme = 'light';
+                }
+            });
+        });
+
+        // 2. Full-Screen Mobile Overlay Menu Logic
+        const mobileMenuOpenBtn = document.getElementById('mobile-menu-open');
+        const mobileMenuCloseBtn = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function openMobileMenu() {
+            mobileMenu.classList.remove('pointer-events-none', 'translate-x-full');
+            mobileMenu.classList.add('opacity-100', 'translate-x-0');
+            document.body.style.overflow = 'hidden'; // Stop background scrolling
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('opacity-100', 'translate-x-0');
+            mobileMenu.classList.add('pointer-events-none', 'translate-x-full');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        mobileMenuOpenBtn.addEventListener('click', openMobileMenu);
+        mobileMenuCloseBtn.addEventListener('click', closeMobileMenu);
+        
+        // Close menu automatically when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
     </script>
 </body>
 </html>
