@@ -3,146 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECMS - Educational Counseling Management</title>
+    <title>ECMS - Federal University Dutse</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.1/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = { theme: { extend: { colors: { milk: '#fffcf9', rust: '#a73a22', mahogany: '#4a1e15' } } } }
+    <script src="https://unpkg.com/lucide@latest"></script> <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    colors: { 
+                        milk: '#fffcf9', 
+                        rust: '#a73a22', 
+                        mahogany: '#4a1e15' 
+                    } 
+                } 
+            } 
+        }
     </script>
 </head>
-<body data-theme="light" class="bg-milk text-stone-800 font-sans selection:bg-rust selection:text-white">
+<body data-theme="light" class="bg-milk text-stone-800 font-sans selection:bg-rust selection:text-white flex flex-col min-h-screen">
 
-    <div class="navbar bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200 px-4 md:px-8">
-        <div class="navbar-start">
-            <a class="btn btn-ghost text-2xl font-black text-mahogany tracking-wider">ECMS<span class="text-rust">.</span></a>
+    <header class="navbar bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-stone-200 px-4 md:px-8 lg:px-12">
+        
+        <div class="navbar-start w-full lg:w-auto flex justify-between lg:justify-start items-center">
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-90 transition-opacity">
+                <img src="assets/images/fud-logo.png" alt="Federal University Dutse Crest" class="h-12 w-auto object-contain fallback-text" onerror="this.outerHTML='<span class=\\'font-black text-2xl text-mahogany\\'>FUD<span class=\\'text-rust\\'>.</span>ECMS</span>'">
+                <div class="hidden sm:flex flex-col">
+                    <span class="font-bold text-mahogany leading-none text-lg">Federal University Dutse</span>
+                    <span class="text-xs text-stone-500 font-medium tracking-wide uppercase">Counseling Portal</span>
+                </div>
+            </a>
+            
+            <div class="dropdown dropdown-end lg:hidden">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle text-mahogany">
+                    <i data-lucide="menu"></i>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-xl bg-white rounded-box w-52 border border-stone-100">
+                    <li><a href="#features" class="text-stone-700 py-3"><i data-lucide="layers" class="w-4 h-4 mr-2"></i> Features</a></li>
+                    <li><a href="#about" class="text-stone-700 py-3"><i data-lucide="info" class="w-4 h-4 mr-2"></i> About</a></li>
+                    <div class="divider my-0"></div>
+                    <li><a href="login.html" class="text-mahogany font-bold py-3"><i data-lucide="log-in" class="w-4 h-4 mr-2"></i> Log In</a></li>
+                </ul>
+            </div>
         </div>
+
         <div class="navbar-center hidden lg:flex">
-            <ul class="menu menu-horizontal px-1 text-stone-600 font-medium">
-                <li><a href="#features" class="hover:text-rust">Features</a></li>
-                <li><a href="#about" class="hover:text-rust">About Us</a></li>
-                <li><a href="#contact" class="hover:text-rust">Contact</a></li>
+            <ul class="menu menu-horizontal px-1 text-stone-600 font-medium gap-2">
+                <li><a href="#features" class="hover:text-rust hover:bg-orange-50 rounded-lg transition-colors">Features</a></li>
+                <li><a href="#about" class="hover:text-rust hover:bg-orange-50 rounded-lg transition-colors">About Portal</a></li>
             </ul>
         </div>
-        <div class="navbar-end gap-3">
-            <a href="login.html" class="btn btn-ghost text-mahogany hidden sm:flex">Log In</a>
-            <a href="signup.html" class="btn bg-rust hover:bg-mahogany text-white border-none shadow-md">Get Started</a>
-        </div>
-    </div>
 
-    <div class="hero min-h-[80vh] bg-milk overflow-hidden relative">
-        <div class="hero-content flex-col lg:flex-row-reverse gap-12 px-4 md:px-8 max-w-7xl w-full">
-            
-            <div class="lg:w-1/2 relative">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" class="rounded-2xl shadow-2xl border-4 border-white transform lg:rotate-2 hover:rotate-0 transition-transform duration-500" alt="Students collaborating" />
+        <div class="navbar-end hidden lg:flex gap-4">
+            <a href="login.html" class="btn btn-ghost text-mahogany hover:bg-stone-100">Log In</a>
+            <a href="signup.html" class="btn bg-rust hover:bg-mahogany text-white border-none shadow-md px-6">Get Started</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="hero min-h-[75vh] bg-milk overflow-hidden relative py-12 lg:py-0">
+            <div class="hero-content flex-col lg:flex-row-reverse gap-8 lg:gap-16 px-4 sm:px-8 lg:px-12 max-w-7xl w-full">
                 
-                <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl border border-stone-100 flex items-center gap-4 animate-bounce" style="animation-duration: 3s;">
-                    <div class="bg-green-100 p-3 rounded-full text-green-600">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                    </div>
-                    <div>
-                        <p class="text-xs text-stone-500 font-bold uppercase">Sessions Booked</p>
-                        <p class="text-xl font-black text-mahogany">1,000+</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lg:w-1/2 mt-10 lg:mt-0">
-                <div class="badge bg-orange-100 text-rust border-none font-bold py-3 px-4 mb-6">Faculty of Education Official Portal</div>
-                <h1 class="text-5xl md:text-6xl font-extrabold text-mahogany leading-tight mb-6">
-                    Student wellness, <br/> <span class="text-rust">simplified.</span>
-                </h1>
-                <p class="py-2 text-lg text-stone-600 mb-8 max-w-lg">
-                    Access professional counseling, schedule appointments effortlessly, and find the academic and mental health resources you need to thrive on campus.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="signup.html" class="btn bg-rust hover:bg-mahogany text-white border-none shadow-lg px-8 h-14 text-lg">Book a Session</a>
-                    <a href="#features" class="btn btn-outline border-stone-300 text-stone-700 hover:bg-stone-100 hover:border-stone-400 px-8 h-14 text-lg">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="bg-white py-12 border-y border-stone-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="stats stats-vertical lg:stats-horizontal shadow-sm border border-stone-100 w-full bg-stone-50">
-                <div class="stat place-items-center py-8">
-                    <div class="stat-title text-stone-500 font-bold">Active Students</div>
-                    <div class="stat-value text-mahogany text-4xl">1.2K</div>
-                    <div class="stat-desc text-stone-400">Registered this semester</div>
-                </div>
-                <div class="stat place-items-center py-8">
-                    <div class="stat-title text-stone-500 font-bold">Professional Counselors</div>
-                    <div class="stat-value text-rust text-4xl">15+</div>
-                    <div class="stat-desc text-stone-400">Ready to assist you</div>
-                </div>
-                <div class="stat place-items-center py-8">
-                    <div class="stat-title text-stone-500 font-bold">Average Wait Time</div>
-                    <div class="stat-value text-mahogany text-4xl">< 24h</div>
-                    <div class="stat-desc text-stone-400">For session approvals</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="features" class="py-24 bg-milk">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-base text-rust font-semibold tracking-wide uppercase">Core Features</h2>
-            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-mahogany sm:text-4xl">Everything you need to succeed</p>
-            
-            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                <div class="card bg-white shadow-md border border-stone-100 hover:shadow-xl transition-shadow">
-                    <div class="card-body">
-                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-rust mb-4">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <div class="lg:w-1/2 relative w-full flex justify-center mt-8 lg:mt-0">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" class="rounded-2xl shadow-2xl border-4 border-white w-full max-w-md lg:max-w-full object-cover aspect-[4/3] lg:aspect-auto transform lg:rotate-2 hover:rotate-0 transition-transform duration-500" alt="FUD Students" />
+                    
+                    <div class="absolute -bottom-6 lg:-left-6 right-4 lg:right-auto bg-white p-4 rounded-xl shadow-xl border border-stone-100 flex items-center gap-4 animate-bounce" style="animation-duration: 4s;">
+                        <div class="bg-green-100 p-3 rounded-full text-green-600">
+                            <i data-lucide="check-circle-2"></i>
                         </div>
-                        <h3 class="card-title text-mahogany">Real-Time Scheduling</h3>
-                        <p class="text-stone-500">Book, reschedule, or cancel appointments instantly with our live calendar integration.</p>
+                        <div>
+                            <p class="text-xs text-stone-500 font-bold uppercase tracking-wide">Portal Status</p>
+                            <p class="text-lg font-black text-mahogany leading-none">Online & Active</p>
+                        </div>
                     </div>
                 </div>
-                <div class="card bg-white shadow-md border border-stone-100 hover:shadow-xl transition-shadow">
-                    <div class="card-body">
-                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-rust mb-4">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        </div>
-                        <h3 class="card-title text-mahogany">Secure & Confidential</h3>
-                        <p class="text-stone-500">Your data is protected with industry-standard encryption. Only your assigned counselor has access.</p>
+
+                <div class="lg:w-1/2 text-center lg:text-left pt-6 lg:pt-0">
+                    <div class="inline-flex items-center gap-2 badge bg-orange-100 text-rust border-none font-bold py-4 px-5 mb-6 shadow-sm">
+                        <i data-lucide="graduation-cap" class="w-4 h-4"></i> Faculty of Education
                     </div>
-                </div>
-                <div class="card bg-white shadow-md border border-stone-100 hover:shadow-xl transition-shadow">
-                    <div class="card-body">
-                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-rust mb-4">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                        </div>
-                        <h3 class="card-title text-mahogany">Resource Library</h3>
-                        <p class="text-stone-500">Gain 24/7 access to curated guides on mental health, exam anxiety, and career building.</p>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-mahogany leading-tight mb-6 tracking-tight">
+                        Student wellness, <br class="hidden sm:block"/> <span class="text-rust relative">simplified.<svg class="absolute w-full h-3 -bottom-1 left-0 text-orange-200 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="transparent"/></svg></span>
+                    </h1>
+                    <p class="py-2 text-base sm:text-lg text-stone-600 mb-8 max-w-lg mx-auto lg:mx-0">
+                        Access professional counseling, schedule appointments effortlessly, and find the academic and mental health resources you need to thrive at Federal University Dutse.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="signup.html" class="btn bg-rust hover:bg-mahogany text-white border-none shadow-lg px-8 h-14 text-base sm:text-lg w-full sm:w-auto group">
+                            Book a Session <i data-lucide="arrow-right" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#features" class="btn btn-outline border-stone-300 text-stone-700 hover:bg-stone-100 hover:border-stone-400 px-8 h-14 text-base sm:text-lg w-full sm:w-auto">
+                            Explore Features
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <footer class="footer p-10 bg-mahogany text-stone-300">
-        <aside>
-            <div class="text-3xl font-black text-white tracking-wider mb-2">ECMS<span class="text-rust">.</span></div>
-            <p>Faculty of Education<br/>Providing reliable support to students since 2024</p>
+        <section class="bg-white py-8 lg:py-12 border-y border-stone-200 w-full">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="stats stats-vertical lg:stats-horizontal shadow-sm border border-stone-100 w-full bg-stone-50 overflow-hidden rounded-2xl">
+                    <div class="stat place-items-center lg:place-items-start py-6 lg:py-8 px-6 hover:bg-stone-100 transition-colors">
+                        <div class="stat-figure text-rust hidden sm:block"><i data-lucide="users" class="w-8 h-8 opacity-50"></i></div>
+                        <div class="stat-title text-stone-500 font-bold tracking-wide">Registered Students</div>
+                        <div class="stat-value text-mahogany text-3xl lg:text-4xl mt-1">1.2K+</div>
+                        <div class="stat-desc text-stone-400 font-medium mt-1">Active this semester</div>
+                    </div>
+                    
+                    <div class="stat place-items-center lg:place-items-start py-6 lg:py-8 px-6 hover:bg-stone-100 transition-colors border-t lg:border-t-0 lg:border-l border-stone-200">
+                        <div class="stat-figure text-rust hidden sm:block"><i data-lucide="stethoscope" class="w-8 h-8 opacity-50"></i></div>
+                        <div class="stat-title text-stone-500 font-bold tracking-wide">Professional Staff</div>
+                        <div class="stat-value text-rust text-3xl lg:text-4xl mt-1">15+</div>
+                        <div class="stat-desc text-stone-400 font-medium mt-1">Certified Counselors</div>
+                    </div>
+                    
+                    <div class="stat place-items-center lg:place-items-start py-6 lg:py-8 px-6 hover:bg-stone-100 transition-colors border-t lg:border-t-0 lg:border-l border-stone-200">
+                        <div class="stat-figure text-rust hidden sm:block"><i data-lucide="clock" class="w-8 h-8 opacity-50"></i></div>
+                        <div class="stat-title text-stone-500 font-bold tracking-wide">Average Wait Time</div>
+                        <div class="stat-value text-mahogany text-3xl lg:text-4xl mt-1">< 24h</div>
+                        <div class="stat-desc text-green-600 font-medium mt-1"><i data-lucide="trending-down" class="w-3 h-3 inline"></i> Highly efficient</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-16 lg:py-24 bg-milk">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-sm text-rust font-bold tracking-widest uppercase">Platform Capabilities</h2>
+                <p class="mt-3 text-3xl leading-tight font-extrabold text-mahogany sm:text-4xl max-w-2xl mx-auto">Everything you need for academic and personal success</p>
+                
+                <div class="mt-12 lg:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 text-left">
+                    
+                    <div class="card bg-white shadow-sm border border-stone-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                        <div class="card-body p-6 lg:p-8">
+                            <div class="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center text-rust mb-6 shadow-inner border border-orange-100">
+                                <i data-lucide="calendar-check-2" class="w-7 h-7"></i>
+                            </div>
+                            <h3 class="card-title text-xl text-mahogany mb-2">Real-Time Scheduling</h3>
+                            <p class="text-stone-500 leading-relaxed text-sm lg:text-base">Book, reschedule, or cancel appointments instantly. Our live calendar ensures you never face double-bookings or delays.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-white shadow-sm border border-stone-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                        <div class="card-body p-6 lg:p-8">
+                            <div class="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center text-rust mb-6 shadow-inner border border-orange-100">
+                                <i data-lucide="shield-check" class="w-7 h-7"></i>
+                            </div>
+                            <h3 class="card-title text-xl text-mahogany mb-2">Secure & Confidential</h3>
+                            <p class="text-stone-500 leading-relaxed text-sm lg:text-base">Your privacy is our priority. Session notes and history are encrypted and strictly restricted to your assigned counselor.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card bg-white shadow-sm border border-stone-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 sm:col-span-2 lg:col-span-1">
+                        <div class="card-body p-6 lg:p-8">
+                            <div class="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center text-rust mb-6 shadow-inner border border-orange-100">
+                                <i data-lucide="book-open" class="w-7 h-7"></i>
+                            </div>
+                            <h3 class="card-title text-xl text-mahogany mb-2">Resource Library</h3>
+                            <p class="text-stone-500 leading-relaxed text-sm lg:text-base">Gain 24/7 access to curated guides on managing exam anxiety, resume building, and mental well-being strategies.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer p-8 lg:p-12 bg-mahogany text-stone-300 grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+        <aside class="col-span-2 lg:col-span-2">
+            <div class="flex items-center gap-3 mb-4">
+                <img src="assets/images/fud-logo.png" alt="FUD Crest" class="w-10 h-10 object-contain grayscale brightness-200 opacity-90" onerror="this.style.display='none'">
+                <div class="text-2xl font-black text-white tracking-wider">ECMS<span class="text-rust">.</span></div>
+            </div>
+            <p class="text-sm leading-relaxed max-w-xs text-stone-400">
+                Official Educational Counseling Management System for the Faculty of Education, Federal University Dutse.<br/><br/>
+                &copy; 2024 FUD. All rights reserved.
+            </p>
         </aside> 
-        <nav>
-            <h6 class="footer-title text-white">Services</h6> 
-            <a class="link link-hover">Academic Counseling</a>
-            <a class="link link-hover">Mental Health Support</a>
-            <a class="link link-hover">Career Guidance</a>
+        <nav class="flex flex-col gap-2">
+            <h6 class="footer-title text-white opacity-100 mb-2">Services</h6> 
+            <a href="#" class="link link-hover text-sm hover:text-white transition-colors">Academic Counseling</a>
+            <a href="#" class="link link-hover text-sm hover:text-white transition-colors">Mental Health Support</a>
+            <a href="#" class="link link-hover text-sm hover:text-white transition-colors">Career Guidance</a>
         </nav> 
-        <nav>
-            <h6 class="footer-title text-white">Platform</h6> 
-            <a href="login.html" class="link link-hover">Student Login</a>
-            <a href="login.html" class="link link-hover">Counselor Portal</a>
+        <nav class="flex flex-col gap-2">
+            <h6 class="footer-title text-white opacity-100 mb-2">Portals</h6> 
+            <a href="login.html" class="link link-hover text-sm hover:text-white transition-colors">Student Login</a>
+            <a href="login.html" class="link link-hover text-sm hover:text-white transition-colors">Counselor Access</a>
+            <a href="signup.html" class="link link-hover text-sm hover:text-white transition-colors">Register Account</a>
         </nav> 
-        <nav>
-            <h6 class="footer-title text-white">Legal</h6> 
-            <a class="link link-hover">Terms of use</a>
-            <a class="link link-hover">Privacy policy</a>
+        <nav class="flex flex-col gap-2">
+            <h6 class="footer-title text-white opacity-100 mb-2">Legal</h6> 
+            <a href="#" class="link link-hover text-sm hover:text-white transition-colors">Terms of Use</a>
+            <a href="#" class="link link-hover text-sm hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" class="link link-hover text-sm hover:text-white transition-colors">Support Center</a>
         </nav>
     </footer>
 
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
