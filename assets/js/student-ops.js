@@ -32,79 +32,68 @@ onAuthStateChanged(auth, (user) => {
 });
 
 function listenToStudentAppointments(studentId) {
-    // Query appointments, sort by creation date
     const q = query(
         collection(db, "appointments"), 
-        where("studentId", "==", studentId),
-        orderBy("createdAt", "desc")
+        where("studentId", "==", studentId)
     );
 
     onSnapshot(q, (snapshot) => {
-        // Notifications Logic
+        // Toast Notifications for status changes
         snapshot.docChanges().forEach((change) => {
             if (change.type === "modified") {
                 const data = change.doc.data();
                 if (data.status === "Confirmed") {
-                    showNotification(`✅ Good news! Your session on ${data.date} has been confirmed.`, "alert-success");
+                    showNotification(`✅ Good news! Your session on ${data.date} is confirmed.`, "alert-success");
                 } else if (data.status === "Declined") {
                     showNotification(`❌ Update: Your session request for ${data.date} was declined.`, "alert-error");
                 }
             }
         });
 
-        const historyList = document.getElementById('dashboard-history-list');
-        historyList.innerHTML = ''; // Clear loading text
+        // Extract, Filter, and Sort data for the Dashboard Card
+        let activeAppointments = [];
         
-        let latestAppointment = null;
-        let appointmentCount = 0;
-
         snapshot.forEach((doc) => {
             const data = doc.data();
-            appointmentCount++;
-
-            // Determine Next Appointment Card (First Pending/Confirmed found)
-            if (!latestAppointment && (data.status === "Confirmed" || data.status === "Pending")) {
-                latestAppointment = data;
+            // We only want to show Pending or Confirmed sessions on the main dashboard
+            if (data.status === "Pending" || data.status === "Confirmed") {
+                activeAppointments.push(data);
             }
-
-            // Build History Table Rows
-            let badgeClass = "badge-ghost";
-            if (data.status === "Pending") badgeClass = "badge-warning";
-            if (data.status === "Confirmed") badgeClass = "badge-info text-white";
-            if (data.status === "Completed") badgeClass = "badge-success text-white";
-            if (data.status === "Declined") badgeClass = "badge-error text-white";
-
-            const counselorName = data.counselorId === 'dr_jenkins' ? 'Dr. Sarah Jenkins' : 'Dr. Michael Chen';
-
-            historyList.innerHTML += `
-                <tr>
-                    <td class="font-medium">${data.date}<br><span class="text-xs text-stone-400">${data.time}</span></td>
-                    <td>${counselorName}</td>
-                    <td class="truncate max-w-xs">${data.reason}</td>
-                    <td><div class="badge ${badgeClass} font-bold shadow-sm">${data.status}</div></td>
-                </tr>
-            `;
         });
 
-        if (appointmentCount === 0) {
-            historyList.innerHTML = `<tr><td colspan="4" class="text-center italic text-stone-500 py-4">No sessions booked yet.</td></tr>`;
-        }
+        // Sort by Date (Closest date first)
+        activeAppointments.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-        // Update Next Appointment UI Card
-        if (latestAppointment) {
+        // Update the UI
+        if (activeAppointments.length > 0) {
+            const nextAppt = activeAppointments[0]; // Grab the closest upcoming one
+
+            // Hide the "Empty" state, show the "Active" state
             noApptState.classList.add('hidden');
             activeApptState.classList.remove('hidden');
-            document.getElementById('next-appt-status').textContent = latestAppointment.status;
-            document.getElementById('next-appt-counselor').textContent = latestAppointment.counselorId === 'dr_jenkins' ? 'Dr. Sarah Jenkins' : 'Dr. Michael Chen';
-            document.getElementById('next-appt-reason').textContent = latestAppointment.reason;
-            document.getElementById('next-appt-date').textContent = latestAppointment.date;
-            document.getElementById('next-appt-time').textContent = latestAppointment.time;
 
+            // Populate the data into the HTML elements
+            document.getElementById('next-appt-status').textContent = nextAppt.status;
+            document.getElementById('next-appt-counselor').textContent = 
+                nextAppt.counselorId === 'dr_jenkins' ? 'Dr. Sarah Jenkins' : 'Dr. Michael Chen';
+            
+            // Truncate the reason if it's too long
+            let reasonText = nextAppt.reason;
+            if (reasonText.length > 35) reasonText = reasonText.substring(0, 35) + "...";
+            document.getElementById('next-appt-reason').textContent = reasonText;
+            
+            document.getElementById('next-appt-date').textContent = nextAppt.date;
+            document.getElementById('next-appt-time').textContent = nextAppt.time;
+
+            // Change badge color based on status
             const statusBadge = document.getElementById('next-appt-status');
-            statusBadge.className = latestAppointment.status === "Pending" 
-                ? "badge bg-orange-100 text-orange-700 border-none font-bold mb-2" 
-                : "badge bg-green-100 text-green-700 border-none font-bold mb-2";
+            if (nextAppt.status === "Pending") {
+                statusBadge.className = "badge bg-orange-100 text-orange-700 border-none font-bold mb-2";
+            } else {
+                statusBadge.className = "badge bg-green-100 text-green-700 border-none font-bold mb-2";
+            }
         } else {
+            // No active appointments found (hide card, show empty state)
             noApptState.classList.remove('hidden');
             activeApptState.classList.add('hidden');
         }
@@ -113,6 +102,8 @@ function listenToStudentAppointments(studentId) {
 
 // Function to trigger DaisyUI Chat Bubble / Toast
 function showNotification(message, typeClass) {
+    if (!notificationContainer) return;
+    
     const bubble = document.createElement('div');
     bubble.className = `alert ${typeClass} shadow-lg text-white font-medium mb-2 transform transition-all duration-300 translate-x-full`;
     bubble.innerHTML = `<span>${message}</span>`;
